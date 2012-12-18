@@ -14,7 +14,7 @@
                 btnId: "qqLoginBtn",
                 //scope: auth option, optional, default all
                 scope: "all",
-                //button size，available values: A_XL| A_L| A_M| A_S|  B_M| B_S| C_S, optional, default B_S
+                //button size, available values: A_XL| A_L| A_M| A_S|  B_M| B_S| C_S, optional, default B_S
                 size: "A_XL"
             }, function(reqData, opts) {
                 //Login successfully

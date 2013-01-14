@@ -1,3 +1,17 @@
+<?php
+function print_pre($array)
+{
+    print("<pre>");
+    $output = print_r($array, true);
+    print(htmlspecialchars($output));
+    print("</pre>");
+}
+
+print_pre($_SESSION);
+exit;
+?>
+
+
 <!DOCTYPE>
 <html>
     <head>

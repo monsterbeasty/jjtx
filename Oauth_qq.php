@@ -26,7 +26,7 @@ class Oauth_qq
         $_SESSION["appid"] = $this->config['appid'];
         $_SESSION["appkey"] = $this->config['appkey'];
         $_SESSION["callback"] = $this->config['callback'];
-        $_SESSION["scope"] = "get_user_info,add_share,list_album,add_album,upload_pic,add_topic,add_one_blog,add_weibo";
+//        $_SESSION["scope"] = "get_user_info,add_share,list_album,add_album,upload_pic,add_topic,add_one_blog,add_weibo";
     }
 
     function login()
@@ -34,8 +34,8 @@ class Oauth_qq
         $_SESSION['state'] = md5(uniqid(rand(), TRUE)); //CSRF protection
         $login_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id="
                 . $_SESSION["appid"] . "&redirect_uri=" . urlencode($_SESSION["callback"])
-                . "&state=" . $_SESSION['state']
-                . "&scope=" . $_SESSION["scope"];
+                . "&state=" . $_SESSION['state'];
+//                . "&scope=" . $_SESSION["scope"];
         header("Location:$login_url");
     }
 
@@ -111,7 +111,7 @@ class Oauth_qq
 
         return $arr;
     }
-
+    
     public function __clone()
     {
         trigger_error('Clone is not allow', E_USER_ERROR);

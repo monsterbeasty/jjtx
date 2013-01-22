@@ -1,13 +1,53 @@
 <?php
-include_once 'Oauth_qq.php';
 
-function print_pre($array)
-{
-    print("<pre>");
-    $output = print_r($array, true);
-    print(htmlspecialchars($output));
-    print("</pre>");
-}
+print_pre($ini_array);
+exit;
+
+
+$a = parse_ini_file_ext("/var/www/ini/config.ini");
+print_pre($a);
+
+$b = apc_cache_info();
+print_pre('cached info:');
+print_pre($b);
+
+$c = apc_load_constants();
+print_pre("cache load constants:");
+print_pre($c);
+
+exit;
+
+    // Add num variable to data store
+    apc_add('num', 1);
+ 
+    // Print initial value
+    echo "Initial value: ", apc_fetch('num'), "<br />";
+ 
+    // Update old value with a new value
+    apc_cas('num', 1, 10);
+ 
+    // Print just updated value
+    echo "Updated value: ", apc_fetch('num'), "<br />";
+ 
+    // Decrease a stored number
+    echo "Decrease 1: ", apc_dec('num'), "<br />";
+    echo "Decrease 3: ", apc_dec('num', 3), "<br />";
+ 
+    // Increase a stored number
+    echo "Increase 2: ", apc_inc('num', 2), "<br />";
+    echo "Increase 1: ", apc_inc('num'), "<br />";
+
+    exit;
+
+include_once 'oauth_qq.php';
+
+//function print_pre($array)
+//{
+//    print("<pre>");
+//    $output = print_r($array, true);
+//    print(htmlspecialchars($output));
+//    print("</pre>");
+//}
 
 session_start();
 

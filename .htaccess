@@ -8,6 +8,8 @@ RewriteRule .* index.php [L,QSA]
 
 # PREPEND CONFIG FILE
 php_value auto_prepend_file "inc/config.php"
+# START SESSION AUTOMATICALLY
+php_value session.auto_start 1
 
 
 # GZIP COMPRESSION

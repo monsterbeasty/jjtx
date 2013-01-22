@@ -1,4 +1,8 @@
 <?php
+$qq_arr = apc_fetch('oauth_qq');
+print_pre($qq_arr);
+exit;
+
 
 print_pre($ini_array);
 exit;

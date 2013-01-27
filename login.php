@@ -6,5 +6,6 @@
     </head>
     <body>
         <a href="login_qq.php"><img src="images/qq_login_logo_large.png"></a>
+        <a href="login_weibo.php"><img src="images/weibo_login_logo_large.png"></a>
     </body>
 </html>

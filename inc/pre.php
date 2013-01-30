@@ -22,7 +22,10 @@ if(!apc_exists('config_const'))
         $CONFIG['site_url'] = 'http://xpttk.com';
         $CONFIG['db_conn']['db_name'] = 'jjtx_prod';
     }
+    
     $CONFIG['qq']['oauth']['callback'] = $CONFIG['site_url'] . '/callback_qq.php';
+    $CONFIG['weibo']['oauth']['wb_callback'] = $CONFIG['site_url'] . '/callback_weibo.php';
+    
     apc_store('config_const', $CONFIG);
 }
 else

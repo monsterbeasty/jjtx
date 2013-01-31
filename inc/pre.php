@@ -26,6 +26,10 @@ if(!apc_exists('config_const'))
     $CONFIG['qq']['oauth']['callback'] = $CONFIG['site_url'] . '/callback_qq.php';
     $CONFIG['weibo']['oauth']['wb_callback'] = $CONFIG['site_url'] . '/callback_weibo.php';
     
+    // THE ABOUT PAGE NEEDS TO BE ADDED
+    $CONFIG['qq']['share']['url'] = $CONFIG['site_url'] . '/about.php';
+    $CONFIG['qq']['share']['fromurl'] = $CONFIG['site_url'];
+    
     apc_store('config_const', $CONFIG);
 }
 else

@@ -1,5 +1,1 @@
-<?php
-
-echo "index page";
-
-?>
+<a href="login.php">Login here</a>

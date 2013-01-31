@@ -9,11 +9,17 @@ return array(
         'db_password' => 'jjtx@dev41212102',
     ),
     
-    // QQ API CREDENTIALS
+    // QQ API
     'qq' => array(
         'oauth' => array(
             'appid' => '100348952',
             'appkey' => 'fc1813885f7f282fa957268ae8beab7e',
+        ),
+        
+        // THIS NEEDS TO BE SET LATER
+        'share' => array(
+            'title' => '关于JJTX', //no space allowed
+            'site' => 'JJTX',
         ),
     ),
     

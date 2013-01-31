@@ -26,6 +26,7 @@ class Oauth_qq
         $_SESSION["appid"] = $this->config['appid'];
         $_SESSION["appkey"] = $this->config['appkey'];
         $_SESSION["callback"] = $this->config['callback'];
+        $_SESSION["scope"] = "get_user_info,add_share,add_t";
 //        $_SESSION["scope"] = "get_user_info,add_share,list_album,add_album,upload_pic,add_topic,add_one_blog,add_weibo";
     }
 
@@ -107,6 +108,46 @@ class Oauth_qq
                 . "&format=json";
 
         $info = get_url_contents($get_user_info);
+        $arr = json_decode($info, true);
+
+        return $arr;
+    }
+    
+    /*
+     * publish Tencent weibo
+     */
+    function add_t($content, $clientip)
+    {
+        $add_t = "https://graph.qq.com/t/add_t?"
+                . "access_token=" . $_SESSION['access_token']
+                . "&oauth_consumer_key=" . $_SESSION["appid"]
+                . "&openid=" . $_SESSION["openid"]
+                . "&format=json"
+                . "&content=$content"
+                . "&clientip=$clientip";
+        
+        $info = get_url_contents($add_t);
+        $arr = json_decode($info, true);
+
+        return $arr;
+    }
+    
+    /*
+     * Share shuoshuo
+     */
+    function add_share($title, $url, $site, $fromurl)
+    {
+        $add_share = "https://graph.qq.com/share/add_share?"
+                . "access_token=" . $_SESSION['access_token']
+                . "&oauth_consumer_key=" . $_SESSION["appid"]
+                . "&openid=" . $_SESSION["openid"]
+                . "&format=json"
+                . "&title=$title"
+                . "&url=$url"
+                . "&site=$site"
+                . "&fromurl=$fromurl";
+        
+        $info = get_url_contents($add_share);
         $arr = json_decode($info, true);
 
         return $arr;

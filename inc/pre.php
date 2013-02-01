@@ -39,6 +39,7 @@ else
 
 // INITIALIZE DB CONN
 include_once 'db.php';
+$DB->set_charset('utf8');
 
 
 // COMMENTED OUT INI PARSING, USE PHP ARRAY FILE INSTEAD

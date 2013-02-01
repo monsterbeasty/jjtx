@@ -15,12 +15,12 @@ if(!apc_exists('config_const'))
     if($ENV == 'dev')
     {
         $CONFIG['site_url'] = 'http://dev.xpttk.com';
-        $CONFIG['db_conn']['db_name'] = 'jjtx_dev';
+        $CONFIG['db']['name'] = 'jjtx_dev';
     }
     elseif($ENV == 'prod')
     {
         $CONFIG['site_url'] = 'http://xpttk.com';
-        $CONFIG['db_conn']['db_name'] = 'jjtx_prod';
+        $CONFIG['db']['name'] = 'jjtx_prod';
     }
     
     $CONFIG['qq']['oauth']['callback'] = $CONFIG['site_url'] . '/callback_qq.php';
@@ -36,6 +36,9 @@ else
 {
     $CONFIG = apc_fetch('config_const');
 }
+
+// INITIALIZE DB CONN
+include_once 'db.php';
 
 
 // COMMENTED OUT INI PARSING, USE PHP ARRAY FILE INSTEAD

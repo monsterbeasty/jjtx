@@ -10,9 +10,7 @@
 //$add_share = $o_qq->add_share($CONFIG['qq']['share']['title'], $CONFIG['qq']['share']['url'], 
 //        $CONFIG['qq']['share']['site'], $CONFIG['qq']['share']['fromurl'])";
 
-print_pre($CONFIG['qq']['share']['title']);
-print_pre($CONFIG['qq']['share']['url']);
-print_pre($CONFIG['qq']['share']['site']);
-print_pre($CONFIG['qq']['share']['fromurl']);
+//print_pre($CONFIG);
+print_pre($DB);
 
 ?>

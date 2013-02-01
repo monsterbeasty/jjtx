@@ -3,10 +3,10 @@
 return array(
     
     // DB CONN VARIABLES
-    'db_conn' => array(
-        'db_host' => 'localhost',
-        'db_user' => 'jjtx_dev',
-        'db_password' => 'jjtx@dev41212102',
+    'db' => array(
+        'host' => 'localhost',
+        'user' => 'jjtx_dev',
+        'password' => 'jjtx@dev41212102',
     ),
     
     // QQ API

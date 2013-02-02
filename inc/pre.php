@@ -3,8 +3,6 @@
 // GZIP COMPRESSION
 ob_start("ob_gzhandler");
 
-include_once 'functions.php';
-
 // ENVIRONMENT IDENTIFIER, READ FROM VHOST CONF FILE
 $ENV = getenv('ENVIRONMENT');
 
@@ -39,7 +37,7 @@ else
 
 // INITIALIZE DB CONN
 include_once 'db.php';
-$DB->set_charset('utf8');
+include_once 'functions.php';
 
 
 // COMMENTED OUT INI PARSING, USE PHP ARRAY FILE INSTEAD

@@ -14,4 +14,6 @@ if(mysqli_connect_errno())
     exit;
 }
 
+$DB->set_charset('utf8');
+
 ?>

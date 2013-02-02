@@ -11,27 +11,15 @@ $user_info = $o_qq->get_user_info();
 print_pre($open_id);
 print_pre($user_info);
 
-$gender = ($user_info['gender'] == '男') ? 'm' : 'f';
-$image_small = $DB->real_escape_string($user_info['figureurl_1']);
-$image_large = $DB->real_escape_string($user_info['figureurl_2']);
+$data['oauth_provider'] = 'qq';
+$data['oauth_uid'] = $open_id;
+$data['name'] = $user_info['nickname'];
+$data['gender'] = $user_info['gender'];
+$data['image_small'] = $user_info['figureurl_1'];
+$data['image_large'] = $user_info['figureurl_2'];
 
-$query = "INSERT INTO user (oauth_provider, oauth_uid, name, gender, image_small, image_large, last_login_time)
-                    VALUES ('qq', '$open_id', '$user_info[nickname]', '$gender', '$image_small', '$image_large', NOW())";
+$login = login($data);
 
-print_pre($query);
-
-$result = $DB->query($query);
-
-print_pre($result);
-
-if(!$result)
-{
-    print_pre('User data insert failed');
-}
-else
-{
-    print_pre('User data insert successful');
-}
 
 /* ADD A QQ SHARE */
 //$add_share = $o_qq->add_share($CONFIG['qq']['share']['title'], $CONFIG['qq']['share']['url'], 

@@ -12,23 +12,27 @@
 
 //print_pre($CONFIG);
 
+$a = test();
+exit;
 
-$query = "INSERT INTO bike (Model, Color)
-                    VALUES ('coupoer', 'red')";
+$query = "select * from bike";
 
-print_pre($query);
-
-$result = $DB->query($query);
-
-print_pre($result);
-
-if(!$result)
+if($result = $DB->query($query))
 {
-    print_pre('User data insert failed');
+    $row_cnt = $result->num_rows;
+    print_pre("num rows: $row_cnt");
+    
+    // USER EXISTS
+    if($row_cnt > 0)
+    {
+        $row = $result->fetch_assoc();
+//        while($row = $result->fetch_assoc())
+//        {
+//            $rows[] = $row;
+//        }
+    }
 }
-else
-{
-    print_pre('User data insert successful');
-}
+//print_pre($rows);
+print_pre($row);
 
 ?>

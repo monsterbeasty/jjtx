@@ -44,8 +44,10 @@ if($token)
     print_pre($user_info);
     print_pre("@@@@@@@@@@@@@@@@@@@@");
     
+    $data = array();
     $data['oauth_provider'] = 'weibo';
     $data['oauth_uid'] = $user_info['id'];
+    $data['oauth_access_token'] = $token['access_token'];
     $data['name'] = $user_info['screen_name'];
     $data['gender'] = $user_info['gender'];
     $data['image_small'] = $user_info['profile_image_url'];
@@ -69,4 +71,9 @@ else
 {
     echo "Auth failed";
 }
+
+print_pre($_COOKIE);
+print_pre($token);
+print_pre($_SESSION);
+//2.00KQMTcCqrxnBCf66d860aaf0wU1r1
 ?>

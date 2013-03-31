@@ -30,7 +30,7 @@ function login($data)
         $data['gender'] = ($data['gender'] == '男') ? 'm' : 'f';
     }
     
-    $fields = array('oauth_provider', 'oauth_uid', 'gender', 'name', 'image_small', 'image_large');
+    $fields = array('oauth_provider', 'oauth_uid', 'oauth_access_token', 'gender', 'name', 'image_small', 'image_large');
     foreach($fields as $field)
     {
         $data[$field] = $DB->real_escape_string($data[$field]);
@@ -42,7 +42,6 @@ function login($data)
     if($result = $DB->query($query))
     {
         $row_cnt = $result->num_rows;
-        print_pre("num rows: $row_cnt");
 
         // USER EXISTS
         if($row_cnt > 0)
@@ -65,8 +64,8 @@ function login($data)
             print_pre("User not exist");
 
             // INSERT DATA
-            $insert_query = "INSERT INTO user (oauth_provider, oauth_uid, name, gender, image_small, image_large, last_login_time)
-                        VALUES ('$data[oauth_provider]', '$data[oauth_uid]', '$data[name]', '$data[gender]', '$data[image_small]', '$data[image_large]', NOW())";
+            $insert_query = "INSERT INTO user (oauth_provider, oauth_uid, oauth_access_token, name, gender, image_small, image_large, last_login_time)
+                        VALUES ('$data[oauth_provider]', '$data[oauth_uid]', '$data[oauth_access_token]', '$data[name]', '$data[gender]', '$data[image_small]', '$data[image_large]', NOW())";
 
             if(!$insert_result = $DB->query($insert_query))
             {
@@ -78,30 +77,6 @@ function login($data)
             }
         }
     }
-}
-
-function test()
-{
-    global $DB;
-    $query = "select * from bike";
-
-    if($result = $DB->query($query))
-    {
-        $row_cnt = $result->num_rows;
-        print_pre("num rows: $row_cnt");
-
-        // USER EXISTS
-        if($row_cnt > 0)
-        {
-            $row = $result->fetch_assoc();
-    //        while($row = $result->fetch_assoc())
-    //        {
-    //            $rows[] = $row;
-    //        }
-        }
-    }
-    //print_pre($rows);
-    print_pre($row);
 }
 
 ?>

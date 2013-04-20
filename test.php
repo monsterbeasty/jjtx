@@ -10,22 +10,37 @@
 //print_pre($CONFIG);
 
 
+$a = get_user(7, '', '', 'id, name, image_small');
+print_pre($a);
+exit;
+
 print_pre($_COOKIE);
+
+$a = $_COOKIE['weibojs_1858950206'];
+print_pre($a);
+
+parse_str($a, $output);
+print_pre($output);
+
+$l = '20130401194839';
+$m = '20130331141922';
+
+$b = strcmp($l, $m);
+print_pre($b);
 exit;
 
-$a = array('aaa', 'bbb');
-
-//fa1p1qupmue4b2regf91ucsd96
-
-setcookie('a', $a);
-exit;
 
 include_once 'lib/oauth/weibo.php';
+
+$c         = new SaeTOAuthV2($CONFIG['weibo']['oauth']['wb_akey'], $CONFIG['weibo']['oauth']['wb_skey']);
+$d        = $c->getTokenFromArray($output); // done
+print_pre($d);
+
+exit;
 
 $token = '2.00KQMTcCqrxnBCf66d860aaf0wU1r1';
 $uid   = '2400725074';
 
-$c         = new SaeTClientV2($CONFIG['weibo']['oauth']['wb_akey'], $CONFIG['weibo']['oauth']['wb_skey'], $token);
 $ms        = $c->home_timeline(); // done
 $uid_get   = $c->get_uid();
 $uid       = $uid_get['uid'];

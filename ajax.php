@@ -2,43 +2,70 @@
 
 include_once("inc/pre.php");
 
-function get_repeat_options($date)
+function login_check()
 {
     $result = array();
-    if(check_date($date) == 0)
+
+    // NEED TO DO THE TIME COMPARISON TO CHECK LAST LOGIN: WEIBO OR QQ
+
+    if (isset($_COOKIE['wb_at']) && $_COOKIE['wb_at'] != '')
     {
-        $result['ok'] = '0';
+        include_once 'lib/oauth/weibo.php';
+        parse_str($_COOKIE['wb_at'], $wb_at);
+        $o = new SaeTOAuthV2($CONFIG['weibo']['oauth']['wb_akey'], $CONFIG['weibo']['oauth']['wb_skey']);
+        $access_token = $o->getTokenFromArray($wb_at);
+        if($access_token)
+        {
+            setcookie('wb_at', http_build_query($wb_at), time() + 60*60*24*365);
+            setcookie('wb_lt', date('YmdHis'), time() + 60*60*24*365);
+            
+            // GET THE USER INFO BY THE ACCESS TOKEN
+            $result['user'] = get_user('', 'weibo', $access_token['access_token'], 'id, name, image_small, reminder');
+            $result['ok'] = '1';
+        }
+        else
+        {
+            $result['ok'] = '0';
+        }
     }
     else
     {
-        $result['ok'] = '1';
-        $result['day_of_week'] = date('N', strtotime($date));
-        $result['day_of_week_format'] = date('l', strtotime($date));
-        $result['day_of_month'] = date('j', strtotime($date));
-        $result['day_of_month_format'] = date('jS', strtotime($date));
-        $result['month_of_year'] = date('n', strtotime($date));
-        $result['month_of_year_format'] = date('F', strtotime($date));
+        $result['ok'] = '0';
     }
+
     return $result;
 }
 
-function login_check($o)
+function change_reminder($option)
 {
     $result = array();
-    $result['ok'] = '1';
-    $result['date'] = date('Y-m-d');
+    
+    $login_result = login_check();
+    // USER NOT LOGGED IN
+    if($login_result['ok'] == '1')
+    {
+        $set_result = set_user_reminder($login_result['user']['id'], $option);
+        $result['ok'] = ($set_result) ? '1' : '0';
+    }
+    // USER LOGGED IN
+    else
+    {
+        $result['ok'] = '0';
+        $result['error'] = 'notLoggedIn';
+    }
+    
     return $result;
 }
 
 $data = $_POST;
 
-switch($data['action'])
+switch ($data['action'])
 {
     case "login_check":
-        $return = login_check($data);
+        $return = login_check();
         break;
-    case "get_repeat_options":
-        $return = get_repeat_options($data['event_start_date']);
+    case "change_reminder":
+        $return = change_reminder($data['option']);
         break;
 }
 

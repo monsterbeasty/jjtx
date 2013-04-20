@@ -79,4 +79,52 @@ function login($data)
     }
 }
 
+function get_user($id='', $oauth_provider='', $oauth_access_token='', $fields='')
+{
+    global $DB;
+    
+    $user = array();
+    
+    $field_query = ($fields == '') ? '*' : $fields;
+    
+    //WHETHER THIS USER EXISTS
+    $query = "SELECT $field_query FROM user WHERE status = 1";
+    
+    if($id != '')
+    {
+        $query .= " AND id = $id";
+    }
+    if($oauth_provider != '')
+    {
+        $query .= " AND oauth_provider = '$oauth_provider'";
+    }
+    if($oauth_access_token != '')
+    {
+        $query .= " AND oauth_access_token = '$oauth_access_token'";
+    }
+    
+    if($result = $DB->query($query))
+    {
+        $user = $result->fetch_assoc();
+    }
+    
+    return $user;
+}
+
+function set_user_reminder($id, $option)
+{
+    global $DB;
+
+    $set_result = false;
+    
+    $query = "UPDATE user SET reminder = '$option' WHERE id = $id";
+    
+    if($result = $DB->query($query))
+    {
+        $set_result = true;
+    }
+    
+    return $set_result;
+}
+
 ?>

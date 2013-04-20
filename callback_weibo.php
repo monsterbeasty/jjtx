@@ -22,7 +22,8 @@ if(isset($_REQUEST['code']))
 if($token)
 {
     $_SESSION['token'] = $token;
-    setcookie('weibojs_' . $o->client_id, http_build_query($token));
+    setcookie('wb_at', http_build_query($token), time() + 60*60*24*365);
+    setcookie('wb_lt', date('YmdHis'), time() + 60*60*24*365);
     
     $c = new SaeTClientV2($CONFIG['weibo']['oauth']['wb_akey'], $CONFIG['weibo']['oauth']['wb_skey'], $_SESSION['token']['access_token']);
     $ms = $c->home_timeline(); // done
